@@ -39,6 +39,9 @@ public class CourseRestController {
 
     @PutMapping("/course")
     public ResponseEntity<String> updateCourse(@RequestBody Course course){
+        if (course == null) {
+            return new ResponseEntity<>("Invalid course data", HttpStatus.BAD_REQUEST);
+        }
         String status = courseService.upsert(course);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
